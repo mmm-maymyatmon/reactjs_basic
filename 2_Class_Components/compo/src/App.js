@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Post from "./components/posts/Post";
 import AddPost from "./components/posts/AddPost";
 
@@ -31,9 +32,14 @@ function App() {
 
   return (
     <div className="container my-5">
-      <h1 className="text-xl text-center mb-5">Posts</h1>
-      <AddPost addPost={addNewPost} />
-      <Post posts={posts} removePost={postDeleteHandler} />
+      <Router>
+        <Routes>
+          <Route path="/" element={ <Post posts={posts} removePost={postDeleteHandler} /> }  />
+          <Route path="/add" element = {<AddPost addPost={addNewPost} />} />
+        </Routes>
+      </Router>
+      
+      
     </div>
   )
 }
