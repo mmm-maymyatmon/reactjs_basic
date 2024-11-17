@@ -3,6 +3,9 @@ import { EyeIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outlin
 import pumpkinImage from '../../images/pumpkin.jpg';
 
 class PostCard extends Component {
+    delete() {
+        this.props.remove(this.props.post.id);
+    }
     render() {
         return (
             <div className="card p-4 border rounded shadow-md sm:flex block justify-end items-center w-full m-auto">
@@ -14,8 +17,8 @@ class PostCard extends Component {
                     />
                 </div>
                 <div className="sm:w-1/4 w-full mb-4 text-center">
-                    <p className="font-bold text-lg">{ this.props.post.title }</p>
-                    <p className="text-gray-600">{ this.props.post.desc }</p>
+                    <p className="font-bold text-lg">{this.props.post.title}</p>
+                    <p className="text-gray-600">{this.props.post.desc}</p>
                 </div>
                 <div className="sm:w-2/4 w-full justify-center flex gap-3">
                     <button
@@ -34,7 +37,7 @@ class PostCard extends Component {
                     </button>
                     <button
                         className="flex items-center gap-2 px-3 py-2 bg-red-100 text-red-500 rounded hover:bg-red-200"
-                        title="Delete Post"
+                        title="Delete Post" onClick={this.delete.bind(this)}
                     >
                         <TrashIcon className="h-5 w-5" />
                         <span>Delete</span>
