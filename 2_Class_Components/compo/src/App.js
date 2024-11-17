@@ -31,7 +31,7 @@ function App() {
 
 
   return (
-    <div className="container my-5">
+    <div className="container">
       <Router>
         <Routes>
           <Route path="/" element={ <Post posts={posts} removePost={postDeleteHandler} /> }  />

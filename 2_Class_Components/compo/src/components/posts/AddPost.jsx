@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { v4 as uuid } from 'uuid';
+import {useNavigate} from 'react-router-dom'
 
 class AddPost extends Component {
 
@@ -10,7 +11,8 @@ class AddPost extends Component {
 
     addUser = (e) => {
         e.preventDefault();
-        this.props.addPost({id: uuid(), ...this.state})
+        this.props.addPost({id: uuid(), ...this.state});
+        this.props.navigate("/");
     }
     render() {
         return (
@@ -55,4 +57,7 @@ class AddPost extends Component {
     }
 }
 
-export default AddPost;
+export default (props) => {
+    const navigator = useNavigate();
+    return <AddPost { ...props } navigate={navigator} />
+}
