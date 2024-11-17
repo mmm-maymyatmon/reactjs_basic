@@ -1,26 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Post from "./components/posts/Post";
 import AddPost from "./components/posts/AddPost";
 
  
 
 function App() {
-  const [posts, setPosts] = useState([
-    {
-        id: 1,
-        title: "Post Title",
-        desc: "Post Description" 
-    },
-    {
-      id: 2,
-      title: "Post Title 2",
-      desc: "Post Description 2" 
-  }
-]);
+  const DB_NAME = "PostDB";
+  const [posts, setPosts] = useState([]);
 
 const addNewPost = (post) => {
   setPosts([post, ...posts]);
 }
+
+useEffect(() => {
+  let data = localStorage.getItem(DB_NAME);
+  if (data) {
+    setPosts(JSON.parse(data));
+  }
+}, []);
+
+
+useEffect(() => {
+  if( posts.length > 0 ) {
+    localStorage.setItem(DB_NAME, JSON.stringify(posts));
+  }
+}, [posts]);
+
 
   return (
     <div className="container my-5">
