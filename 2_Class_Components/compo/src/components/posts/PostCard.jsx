@@ -30,13 +30,13 @@ class PostCard extends Component {
                         <EyeIcon className="h-5 w-5" />
                         <span>View</span>
                     </Link>
-                    <button
+                    <Link to={`post/edit/${post.id}`} state={{ post: post }}
                         className="flex items-center gap-2 px-3 py-2 bg-green-100 text-green-500 rounded hover:bg-green-200"
                         title="Edit Post"
                     >
                         <PencilSquareIcon className="h-5 w-5" />
                         <span>Edit</span>
-                    </button>
+                    </Link>
                     <button
                         className="flex items-center gap-2 px-3 py-2 bg-red-100 text-red-500 rounded hover:bg-red-200"
                         title="Delete Post" onClick={this.delete.bind(this)}

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Post from "./components/posts/Post";
 import AddPost from "./components/posts/AddPost";
 import PostDetail from "./components/posts/PostDetail";
+import EditPost from "./components/posts/EditPost";
 
 function App() {
   const END_POINT = "http://localhost:9000/posts";
@@ -19,7 +20,6 @@ function App() {
         "content-type": "application/json"
       }
     })
-
     setPosts([post, ...posts]);
   }
 
@@ -38,6 +38,17 @@ function App() {
     })
     setPosts(posts.filter(post => post.id !== id));
   }
+
+  const updatePostHandler = async(updatePost) => {
+    await fetch(END_POINT + "/" + updatePost.id, {
+      method: "PATCH",
+      body: JSON.stringify(updatePost),
+      headers: {
+        "content-type" : "application-json"
+      }
+    })
+    setPosts(posts.map(post => post.id === updatePost.id ? updatePost : post));
+  }
   return (
     <div className="container">
       <Router>
@@ -45,6 +56,7 @@ function App() {
           <Route path="/" element={<Post posts={posts} removePost={postDeleteHandler} />} />
           <Route path="/add" element={<AddPost addPost={addNewPost} />} />
           <Route path="/post/:id" element={<PostDetail />} />
+          <Route path="/post/edit/:id" element={<EditPost updatePost= {updatePostHandler} />} />
         </Routes>
       </Router>
     </div>
