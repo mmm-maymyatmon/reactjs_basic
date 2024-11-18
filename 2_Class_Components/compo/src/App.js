@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Post from "./components/posts/Post";
 import AddPost from "./components/posts/AddPost";
+import PostDetail from "./components/posts/PostDetail";
 
 function App() {
   const DB_NAME = "PostDB";
@@ -36,6 +37,7 @@ function App() {
         <Routes>
           <Route path="/" element={ <Post posts={posts} removePost={postDeleteHandler} /> }  />
           <Route path="/add" element = {<AddPost addPost={addNewPost} />} />
+          <Route path="/post/:id" element = {<PostDetail />} />
         </Routes>
       </Router>
       
