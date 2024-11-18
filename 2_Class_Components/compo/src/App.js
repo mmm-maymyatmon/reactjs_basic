@@ -5,7 +5,7 @@ import AddPost from "./components/posts/AddPost";
 import PostDetail from "./components/posts/PostDetail";
 
 function App() {
-  const DB_NAME = "PostDB";
+  const END_POINT = "http://localhost:9000";
   const [posts, setPosts] = useState([]);
 
   const addNewPost = (post) => {
@@ -13,18 +13,13 @@ function App() {
   }
 
   useEffect(() => {
-    let data = localStorage.getItem(DB_NAME);
-    if (data) {
-      setPosts(JSON.parse(data));
-    }
+    const fetchData = async () => {
+      let data = await (await fetch(`${END_POINT}/posts`)).json();
+      setPosts(data); 
+    };
+    fetchData();
   }, []);
-
-
-  useEffect(() => {
-    if (posts.length > 0) {
-      localStorage.setItem(DB_NAME, JSON.stringify(posts));
-    }
-  }, [posts]);
+  
 
   const postDeleteHandler = (id) => {
     setPosts(posts.filter(post => post.id !== id));
