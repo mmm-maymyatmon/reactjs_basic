@@ -5,17 +5,32 @@ import AddPost from "./components/posts/AddPost";
 import PostDetail from "./components/posts/PostDetail";
 
 function App() {
-  const END_POINT = "http://localhost:9000";
+  const END_POINT = "http://localhost:9000/posts";
   const [posts, setPosts] = useState([]);
 
-  const addNewPost = (post) => {
+  const addNewPost = async(post) => {
+    await fetch(END_POINT, {
+      method: "POST",
+      body: JSON.stringify({
+        title: post.title,
+        desc: post.desc
+      }),
+      headers: {
+        "content-type" : "application/json"
+      }
+    })
+
+
+
+
+     
     setPosts([post, ...posts]);
   }
 
   useEffect(() => {
     const fetchData = async () => {
-      let data = await (await fetch(`${END_POINT}/posts`)).json();
-      setPosts(data); 
+      let posts = await (await fetch(`${END_POINT}`)).json();
+      setPosts(posts); 
     };
     fetchData();
   }, []);
