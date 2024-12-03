@@ -1,12 +1,12 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import './i18n'; // Ensure i18n is initialized
+import './i18n'; 
 
 const App = () => {
   const { t, i18n } = useTranslation();
 
   const changeLang = (e) => {
-    i18n.changeLanguage(e.target.value); // Change language on selection
+    i18n.changeLanguage(e.target.value); 
   };
 
   return (
